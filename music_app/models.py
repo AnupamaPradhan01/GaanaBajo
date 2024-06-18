@@ -14,6 +14,8 @@ class Song(models.Model):
     song_file = models.FileField(upload_to='uploads/')
     publish = models.DateTimeField(default=timezone.now)
 
-    # defining default sort order
+    # defining default sort order(reverse chronological order)from newest to oldest
     class Meta:
         ordering = ['-publish']
+        # adding a database index for queries filtering or ordering
+        indexes = [models.Index(fields=['-publish']),]
