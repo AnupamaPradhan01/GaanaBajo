@@ -1,6 +1,12 @@
 from django.db import models
 from django.utils import timezone
 
+# creating model manager
+
+
+class HindiManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(lang=Song.Languages.HINDI)
 # song model.
 
 
@@ -21,7 +27,13 @@ class Song(models.Model):
     lang = models.CharField(
         max_length=2, choices=Languages.choices, default=Languages.HINDI)
 
+    # default manager
+    objects = models.Manager()
+    # custom manager
+    hindi = HindiManager()
+
     # defining default sort order(reverse chronological order)from newest to oldest
+
     class Meta:
         ordering = ['-publish']
         # adding a database index for queries filtering or ordering
