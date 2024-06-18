@@ -13,3 +13,7 @@ class Song(models.Model):
     song_img = models.ImageField(upload_to='images/')
     song_file = models.FileField(upload_to='uploads/')
     publish = models.DateTimeField(default=timezone.now)
+
+    # defining default sort order
+    class Meta:
+        ordering = ['-publish']
