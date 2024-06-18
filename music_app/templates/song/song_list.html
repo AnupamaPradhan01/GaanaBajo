@@ -1,0 +1,29 @@
+{% extends 'music_app/base.html' %}
+ {% block content %}
+
+<h2>All Songs</h2>
+{% comment %} start of row {% endcomment %}
+<div class="row p-2">
+  {% for songs in songs %}
+  {% comment %} start of column {% endcomment %}
+  <div class="col-3"> 
+    {% comment %} single song content {% endcomment %}
+    <div class="list" style="width:12rem;"> 
+        <img class="card-img-top" src= "{{songs.song_img.url}}" alt="Card image cap"> 
+      {% comment %} song info starts {% endcomment %}
+      <div class="list-body"> 
+          <h5 class="list-title mt-2">{{songs.name}}</h5> 
+          <p class="list-text">{{songs.singer}}</p>
+          <a href="" class="btn btn-warning">Play</a> 
+          <a href="" class="btn btn-success">Share</a>
+      </div> 
+      {% comment %} song info ends {% endcomment %}
+    </div> 
+  {% comment %} single song content ends {% endcomment %}
+  </div>
+  {% comment %} end of column {% endcomment %}
+  {% endfor %}
+</div>
+{% comment %} end of row  {% endcomment %}
+
+{% endblock content %}
