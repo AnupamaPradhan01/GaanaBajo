@@ -12,7 +12,7 @@
         <img class="card-img-top" src= "{{songs.song_img.url}}" alt="Card image cap"> 
       {% comment %} song info starts {% endcomment %}
       <div class="list-body"> 
-          <a href="{% url 'music_app:song_detail' songs.id %}">
+          <a href="{{ songs.get_absolute_url }}">
             <h5 class="list-title mt-2">{{songs.name}}</h5> 
           </a> 
           <p class="list-text">{{songs.singer}}</p>

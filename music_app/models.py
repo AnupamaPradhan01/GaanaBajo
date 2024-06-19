@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 # creating model manager
 
@@ -38,3 +39,8 @@ class Song(models.Model):
         ordering = ['-publish']
         # adding a database index for queries filtering or ordering
         indexes = [models.Index(fields=['-publish']),]
+
+    # adding a canonical url
+
+    def get_absolute_url(self):
+        return reverse("music_app:song_detail", args=[self.id])
