@@ -18,7 +18,7 @@ class Song(models.Model):
         ENGLISH = 'E', 'English'
 
     name = models.CharField(max_length=250)
-    slug = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250, unique_for_date='publish')
     album = models.CharField(max_length=250)
     singer = models.CharField(max_length=250)
     year = models.IntegerField()
@@ -43,4 +43,4 @@ class Song(models.Model):
     # adding a canonical url
 
     def get_absolute_url(self):
-        return reverse("music_app:song_detail", args=[self.id])
+        return reverse("music_app:song_detail", args=[self.publish.year, self.slug])

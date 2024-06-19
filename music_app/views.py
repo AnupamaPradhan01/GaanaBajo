@@ -10,6 +10,7 @@ def song_list(request):
 # display single song
 
 
-def song_detail(request, id):
-    song = get_object_or_404(Song, id=id, lang=Song.Languages.HINDI)
+def song_detail(request, year, song):
+    song = get_object_or_404(
+        Song,  lang=Song.Languages.HINDI,  publish__year=year, slug=song,)
     return render(request, 'music_app/song/song_detail.html', {'song': song})
