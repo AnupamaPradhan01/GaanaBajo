@@ -5,7 +5,7 @@ from .models import Song
 
 def song_list(request):
     songs = Song.hindi.all()
-    return render(request, "song/song_list.html", {'songs': songs})
+    return render(request, "music_app/song/song_list.html", {'songs': songs})
 
 # display single song
 

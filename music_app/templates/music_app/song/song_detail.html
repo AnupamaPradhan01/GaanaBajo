@@ -1,0 +1,31 @@
+{% extends 'music_app/base.html' %}
+{% block content %}
+<div class="row mt-5">
+  {% comment %} image column {% endcomment %}
+  <div class="col-4">
+    <img src="{{song.song_img.url}}" alt="" style="width:20rem">
+  </div>
+  {% comment %} end of image column {% endcomment %}
+
+ {% comment %} song detail info column {% endcomment %}
+    <div class="col-8 mt-4">
+      <h4>{{song.name}}</h4>
+      <p>Album:{{song.album}}</p>
+      <p>Singer:{{song.singer}}</p>
+      <p>Release year:{{song.year}}</p>
+      <div class="row">
+        <div class="col-3">
+          <a href="" class="btn btn-primary">Create new playlist</a>
+        </div>
+        <div class="col-3">
+          <a href="" class="btn btn-success">Add to playlist</a>
+        </div>
+        <div class="col-10 mt-2">
+          <a href="" class="btn btn-danger" style="width:20rem">Add to favourite</a>
+        </div>
+      </div>
+    </div> 
+  {% comment %} song detail info column {% endcomment %} 
+  </div>
+
+{% endblock content%}
