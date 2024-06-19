@@ -10,7 +10,9 @@
   </head>
   <body>
     {% include 'music_app/navbar.html' %}
-    <div class="container">{% block content %}{% endblock content %}</div>
+    <div class="container">
+      {% block content %}{% endblock content %}
+    </div>
 
     <script src="{% static 'music_app/js/bootstrap.js' %}"></script>
     <script src="{% static 'music_app/js/jquery.js' %}"></script>
