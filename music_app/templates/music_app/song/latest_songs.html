@@ -1,0 +1,7 @@
+<ul>
+  {% for song in latest_songs %}
+  <li>
+    <a href="{{song.get_absolute_url}}">{{song.name}}</a>
+  </li>
+  {% endfor %}
+</ul>

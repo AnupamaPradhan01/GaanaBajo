@@ -1,3 +1,4 @@
+{% load music_app_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +11,34 @@
   </head>
   <body>
     {% include 'music_app/navbar.html' %}
-    <div class="container">
-      {% block content %}{% endblock content %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-2">
+          <div id="sidebar">
+            <h2>My music</h2>
+            <p>This is my blog.
+              I've wriiten {% total_songs %} songs so far.
+            </p>
+            <h3>Latest Songs</h3>
+            {% show_latest_songs 3 %}
+            <h3>Top Artists</h3>
+            {% show_top_artists 3  %} 
+          </div>
+        </div> 
+        <div class="col-10">
+          {% block content %}{% endblock content%}
+        </div>
+      </div>
     </div>
+   
+
+
+    
+    
+
+  
+  
+    
 
     <script src="{% static 'music_app/js/bootstrap.js' %}"></script>
     <script src="{% static 'music_app/js/jquery.js' %}"></script>

@@ -1,0 +1,7 @@
+<ul>
+  {% for song in top_artists %}
+  <li>
+    <a href="{{song.get_absolute_url}}">{{song.singer}}</a>
+  </li>
+  {% endfor %}
+</ul>

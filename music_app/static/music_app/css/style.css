@@ -65,3 +65,10 @@ input[type=submit] {
   font-size: 14px;
   text-transform: uppercase;
 }
+
+#sidebar {
+  height: 100%;
+  background: #f72121;
+  border: 1px solid;
+
+}
