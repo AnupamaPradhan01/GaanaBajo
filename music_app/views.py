@@ -1,12 +1,19 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Song
 from .forms import EmailSongForm
+from django.core.mail import send_mail
+from taggit.models import Tag
 #  display song list .
 
 
-def song_list(request):
+def song_list(request, tag_slug=None):
     songs = Song.hindi.all()
-    return render(request, "music_app/song/song_list.html", {'songs': songs})
+    # filter songs by tag
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        songs = songs.filter(tags__in=[tag])
+    return render(request, "music_app/song/song_list.html", {'songs': songs, 'tag': tag})
 
 # display single song
 
@@ -21,7 +28,9 @@ def song_detail(request, year, song):
 
 def song_share(request, song_id):
     # retrieve post by id
-    song = get_object_or_404(Song, id=song_id, lang=Song.Languages.HINDI)
+    song = get_object_or_404(Song,  lang=Song.Languages.HINDI, id=song_id)
+
+    sent = False
     if request.method == 'POST':
         # form was submitted
         form = EmailSongForm(request.POST)
@@ -29,6 +38,15 @@ def song_share(request, song_id):
             # form fields passed validation
             cd = form.cleaned_data
             # .....send email
+            song_url = request.build_absolute_uri(song.get_absolute_url())
+            subject = f"{cd['name']} recommends you to listen "\
+                f"{song.name}"
+            message = f"Listen{song.name} at {song_url}\n\n"\
+                f"{cd['name']}\'s comments:{cd['comments']}"
+            send_mail(subject, message,
+                      'anupama13pradhan@gmail.com', [cd['to']])
+
+            sent = True
     else:
         form = EmailSongForm()
-    return render(request, 'music_app/song/song_share.html')
+    return render(request, 'music_app/song/song_share.html', {'song': song, 'sent': sent, 'form': form})

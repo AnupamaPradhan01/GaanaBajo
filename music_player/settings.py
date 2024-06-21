@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'music_app'
+    'music_app',
+    'taggit'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # configuration media files
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
+
+# Email Configuration
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'anupama13pradhan@gmail.com'
+EMAIL_HOST_PASSWORD = 'uizf ygoi vxll kszo'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

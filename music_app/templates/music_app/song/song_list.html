@@ -2,6 +2,11 @@
  {% block content %}
 
 <h2>All Songs</h2>
+{% comment %} filtering the tag {% endcomment %}
+{% if tag %}
+<h2>Songs tagged with "{{tag.name}}" </h2>
+{% endif %}
+{% comment %} filtering ends here {% endcomment %}
 {% comment %} start of row {% endcomment %}
 <div class="row p-2">
   {% for songs in songs %}
@@ -15,9 +20,17 @@
           <a href="{{ songs.get_absolute_url }}">
             <h5 class="list-title mt-2">{{songs.name}}</h5> 
           </a> 
+          {% comment %} adding tags start {% endcomment %}
+          <p class="tags">Tags:
+            {% for tag in songs.tags.all %}
+              <a href="{% url "music_app:song_list_by_tag" tag.slug  %}">{{tag.name}}</a>
+              {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+          </p>
+          {% comment %} adding tags end {% endcomment %}
           <p class="list-text">{{songs.singer}}</p>
           <a href="" class="btn btn-warning">Play</a> 
-          <a href="" class="btn btn-success">Share</a>
+          <a href="{% url 'music_app:song_share' songs.id %}" class="btn btn-success">Share</a>
       </div> 
       {% comment %} song info ends {% endcomment %}
     </div> 

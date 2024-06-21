@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 # creating model manager
 
@@ -32,6 +33,8 @@ class Song(models.Model):
     objects = models.Manager()
     # custom manager
     hindi = HindiManager()
+    # adding tag manager
+    tags = TaggableManager()
 
     # defining default sort order(reverse chronological order)from newest to oldest
 

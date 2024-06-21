@@ -1,0 +1,16 @@
+{% extends 'music_app/base.html' %}
+
+
+{% block content %}
+{% if sent %}
+<h1>Email sent successfully!</h1>
+<p>{{song.name}} was successfully sent to {{form.cleaned_data.to}}.</p>
+{% else %}
+<h1>Share '"{{song.name}}" by email</h1>
+<form action="" method="POST">
+   {% csrf_token %}
+   {{form.as_p}}
+   <input type="submit" value="Send e-mail">
+</form>
+{% endif %}
+{% endblock content %}
