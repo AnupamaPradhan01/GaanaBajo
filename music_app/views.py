@@ -3,6 +3,7 @@ from .models import Song
 from .forms import EmailSongForm
 from django.core.mail import send_mail
 from taggit.models import Tag
+from django.db.models import Count
 #  display song list .
 
 
@@ -21,7 +22,14 @@ def song_list(request, tag_slug=None):
 def song_detail(request, year, song):
     song = get_object_or_404(
         Song,  lang=Song.Languages.HINDI,  publish__year=year, slug=song,)
-    return render(request, 'music_app/song/song_detail.html', {'song': song})
+    # list of similar songs
+    song_tags_ids = song.tags.values_list('id', flat=True)
+    similar_songs = Song.hindi.filter(
+        tags__in=song_tags_ids)\
+        .exclude(id=song.id)
+    similar_songs = similar_songs.annotate(same_tags=Count('tags'))\
+        .order_by('-same_tags', '-publish')[:4]
+    return render(request, 'music_app/song/song_detail.html', {'song': song, 'similar_songs': similar_songs})
 
 # song share via email
 

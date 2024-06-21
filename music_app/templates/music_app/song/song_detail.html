@@ -28,5 +28,26 @@
     </div> 
   {% comment %} song detail info column {% endcomment %} 
   </div>
+  {% comment %} similar songs start {% endcomment %}
+  <h2 class="mt-4">Similar Songs</h2><hr>
+  <div class="row">
+    
+    {% for song in similar_songs %}
+    <div class="col-2">
+      <div class="similar">
+        <img class="card-img-top" src="{{song.song_img.url}}" alt="Card image cap" style="width:10rem">
+        <div class="similar-body">
+          <p>
+            <a href="{{song.get_absolute_url}}">{{song.name|truncatechars:15}}</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+      There are no similar song.
+    {% endfor %}
+    </div>
+  </div>
+  {% comment %} similar songs end {% endcomment %}
 
 {% endblock content%}

@@ -18,7 +18,7 @@
       {% comment %} song info starts {% endcomment %}
       <div class="list-body"> 
           <a href="{{ songs.get_absolute_url }}">
-            <h5 class="list-title mt-2">{{songs.name}}</h5> 
+            <h5 class="list-title mt-2">{{songs.name|truncatechars:15}}</h5> 
           </a> 
           {% comment %} adding tags start {% endcomment %}
           <p class="tags">Tags:
