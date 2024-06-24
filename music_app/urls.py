@@ -9,5 +9,5 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', views.song_list, name='song_list_by_tag'),
     path('<int:year>/<slug:song>/', views.song_detail, name='song_detail'),
     path('<int:song_id>/', views.song_share, name='song_share'),
-    path('login', av.user_login, name="user_login")
+
 ]
